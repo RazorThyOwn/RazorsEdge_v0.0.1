@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{5A117482-F7FE-EAD9-9D39-996560F651E6}</ProjectGuid>
+    <ProjectGuid>{8821ED9A-4489-D7CA-D87C-87CC752778C1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -52,6 +52,9 @@
      <Compile Include="Assets\Scripts\Navigation\Node.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerSpawn.cs" />
+     <Compile Include="Assets\Scripts\World\MWorld.cs" />
+     <Compile Include="Assets\Scripts\World\MWorld_Chunk.cs" />
+     <Compile Include="Assets\Scripts\World\MWorld_Tile.cs" />
      <Compile Include="Assets\Scripts\World\World.cs" />
      <Compile Include="Assets\Scripts\World\WorldGen.cs" />
      <Compile Include="Assets\Scripts\World\WorldTile.cs" />

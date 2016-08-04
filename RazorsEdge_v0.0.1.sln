@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{92C3EE60-3F4A-4D51-992E-C38CA52D7421}") = "RazorsEdge_v0.0.1", "Assembly-CSharp.csproj", "{8821ED9A-4489-D7CA-D87C-87CC752778C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8821ED9A-4489-D7CA-D87C-87CC752778C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8821ED9A-4489-D7CA-D87C-87CC752778C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8821ED9A-4489-D7CA-D87C-87CC752778C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8821ED9A-4489-D7CA-D87C-87CC752778C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

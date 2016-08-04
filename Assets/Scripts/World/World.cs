@@ -9,16 +9,19 @@ public class World : MonoBehaviour {
 	private GameObject[,] localArray;
 	private Grid grid;
 
-	public void genIslands() {
-		
+	public void genIslands(int dimX_, int dimY_) {
+
+		this.dimX = dimX_;
+		this.dimY = dimY_;
+
 		WorldGen wg = new WorldGen (tilesToUse);
 		localArray = wg.islands (dimX, dimY, 25, 4);
 		grid = wg.getGrid ();
 	}
 
-	public void spawnWorld() {
+	public void spawnMapWorld() {
 
-		float bottomX = 3f - (dimX / 2) * 0.4f;
+		float bottomX = 2.6f - (dimX / 2) * 0.4f;
 		float bottomY = 3.8f - (dimY / 2) * 0.4f;
 
 		for (int i = 0; i < dimX; i++) {
@@ -29,8 +32,28 @@ public class World : MonoBehaviour {
 			}
 		}
 	}
+
+	public void hideMapWorld() {
+
+		for (int i = 0; i < dimX; i++) {
+			for (int j = 0; j < dimY; j++) {
+				GameObject worldTile = localArray [i, j];
+				worldTile.SetActive (false);
+			}
+		}
+	}
+
+	public void showMapWorld() {
 		
-	void pressedTile(float x, float y) {
+		for (int i = 0; i < dimX; i++) {
+			for (int j = 0; j < dimY; j++) {
+				GameObject worldTile = localArray [i, j];
+				worldTile.SetActive (true);
+			}
+		}
+	}
+		
+	public void pressedTile(float x, float y) {
 		
 		float i = Mathf.Floor(x / 0.4f);
 		float j = Mathf.Floor(y / 0.4f);
