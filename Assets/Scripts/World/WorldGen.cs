@@ -65,10 +65,13 @@ public class WorldGen : MonoBehaviour {
 	// Larger the depthFactor, the smaller the water edge is between the edge of the map. Should ALWAYS be > 2
 	public GameObject[,] islands(int dimX, int dimY, int numIslands, int depthFactor) {
 
+		Debug.Log ("Initializing world...");
 		GameObject[,] world = new GameObject[dimX, dimY];
-		grid = new Grid (null, null, 0, new Vector2 (dimX, dimY), 0.2f);
+		Debug.Log (world);
 
 		fillSolidWorld (world, tilesToUse [0], dimX, dimY);
+
+		Debug.Log (world);
 
 		// Generating the island
 		int count = 0;
@@ -112,7 +115,8 @@ public class WorldGen : MonoBehaviour {
 
 		}
 
-
+		Debug.Log ("Generated islands within worldgen...");
+		Debug.Log (world);
 		//spawnWorld (world, dimX, dimY);
 		return world;
 
