@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject mainMen;
 	public GameObject mapMen;
 	public GameObject clonePlayerObject;
+	public GameObject[] tilesToUse;
 
 	// # Private variables # //
 
@@ -35,6 +36,9 @@ public class GameManager : MonoBehaviour {
 	float mapSize = 1;
 
 	MWorld mw;
+
+	int[,] tileIDArray;
+	int chunkDim = 19;
 
 	// # When the game launches # //
 
@@ -85,8 +89,10 @@ public class GameManager : MonoBehaviour {
 
 			// Input fields
 
-			Rect slider = new Rect (540, 150, 100, 30);
-			mapSize = Mathf.RoundToInt(GUI.HorizontalSlider(slider,mapSize,1.0f,5.0f));
+			Rect sliderMapSize = new Rect (540, 150, 100, 30);
+			Rect sliderChunkSize = new Rect (540, 200, 100, 30);
+			mapSize = Mathf.RoundToInt(GUI.HorizontalSlider(sliderMapSize,mapSize,1.0f,5.0f));
+			chunkDim = Mathf.RoundToInt(GUI.HorizontalSlider(sliderChunkSize,chunkDim,19.0f,49.0f));
 
 			string mapSizeString = "";
 
@@ -97,6 +103,7 @@ public class GameManager : MonoBehaviour {
 			else if (mapSize == 5) {mapSizeString = "Extra Large (45x45)";}
 
 			GUI.Label (new Rect (540, 160, 100, 180), mapSizeString);
+			GUI.Label (new Rect(540, 210, 100, 180), ("Chunk size: "+chunkDim));
 
 			if (GUI.Button (new Rect ((scrW / 2 - 50), 50, 100, 40), "New World")) {
 
@@ -118,6 +125,8 @@ public class GameManager : MonoBehaviour {
 
 			if (GUI.Button (new Rect ((scrW / 2 + 90), 50, 100, 40), "Accept World")) {
 
+				Debug.Log ("Accepting world...");
+
 				if (currentWorld != null) {
 					
 					isMap = false;
@@ -126,10 +135,10 @@ public class GameManager : MonoBehaviour {
 					mapMen.SetActive (false);
 
 
-					World ws = (World)currentWorld.GetComponent<World> ();
-					ws.hideMapWorld ();
+					World worldMap = (World)currentWorld.GetComponent<World> ();
+					worldMap.hideMapWorld ();
 
-					createMWorld (mapSizeDimX, mapSizeDimY, ws);
+					createMWorld (mapSizeDimX, mapSizeDimY, worldMap);
 				}
 			}
 
@@ -180,15 +189,27 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-	public void createMWorld(int dimX, int dimY, World ws) {
+	public void createMWorld(int dimX, int dimY, World worldMap) {
 
 		Debug.Log(System.DateTime.Now);
 
 		Debug.Log ("Creating MWorld...");
 
+		tileIDArray = worldMap.getTileIDArray ();
+
+		//Debug.Log (tileIDArray [7, 7]);
+
 		mw = (MWorld)MWorld.CreateInstance ("MWorld");
-		mw.initMWorld (1, 3, 50);
-		mw.initChunks ();
+		mw.tilesToUse = tilesToUse;
+		mw.tileIDArray = tileIDArray;
+		mw.initMWorld (mapSizeDimX, mapSizeDimY, chunkDim);
+		mw.initChunks ((int)(mapSizeDimX/2) - 1, (int)(mapSizeDimY/2) - 1, (int)(mapSizeDimX/2) + 1, (int)(mapSizeDimY/2) + 1);
+
+
+		Debug.Log(System.DateTime.Now);
+		Debug.Log ("Spawning chunks");
+
+		mw.spawnCornucopia ();
 
 		Debug.Log(System.DateTime.Now);
 	}

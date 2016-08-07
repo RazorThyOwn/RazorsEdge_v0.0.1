@@ -16,6 +16,8 @@ public class World : MonoBehaviour {
 
 		WorldGen wg = new WorldGen (tilesToUse);
 		localArray = wg.islands (dimX, dimY, 25, 4);
+		Debug.Log ("Generated islands...");
+		Debug.Log (getTileIDArray ());
 		grid = wg.getGrid ();
 	}
 
@@ -26,7 +28,10 @@ public class World : MonoBehaviour {
 
 		for (int i = 0; i < dimX; i++) {
 			for (int j = 0; j < dimY; j++) {
+				Debug.Log ("Spawning map tiles...");
+				Debug.Log (localArray);
 				GameObject worldTile = localArray [i, j];
+				Debug.Log (worldTile);
 
 				worldTile.transform.Translate (new Vector3 (0.4f*i + bottomX, 0.4f*j + bottomY, 0));
 			}
@@ -61,6 +66,33 @@ public class World : MonoBehaviour {
 		if ( i >= 0 && j >= 0 && i < localArray.GetLength(0) && j < localArray.GetLength(1) ) {
 			GameObject pressedTile = localArray [(int)i, (int)j];
 		}
+	}
+
+	public int[,] getTileIDArray() {
+
+		Debug.Log ("Geting tileIDArray");
+
+		int[,] returnArray = new int[localArray.GetLength (0), localArray.GetLength (1)];
+
+		for (int i = 0; i < localArray.GetLength(0); i++) {
+			for (int j = 0; j < localArray.GetLength(1); j++) {
+				string tag = localArray[i,j].tag;
+
+				int id = -1;
+				if (tag.Equals("ter_deepwater")) {id = 0;}
+				else if (tag.Equals("ter_water")) {id = 1;}
+				else if (tag.Equals("ter_sand")) {id = 2;}
+				else if (tag.Equals("ter_grass")) {id = 3;}
+				else if (tag.Equals("ter_mountain")) {id = 4;}
+				else if (tag.Equals("ter_forest")) {id = 5;}
+
+				returnArray [i, j] = id;
+			}
+		}
+
+		Debug.Log ("Returning tileIDArray");
+
+		return returnArray;
 	}
 
 	public void killMe() {
