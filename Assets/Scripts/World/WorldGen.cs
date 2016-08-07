@@ -66,7 +66,6 @@ public class WorldGen : MonoBehaviour {
 	public GameObject[,] islands(int dimX, int dimY, int numIslands, int depthFactor) {
 
 		GameObject[,] world = new GameObject[dimX, dimY];
-		grid = new Grid (null, null, 0, new Vector2 (dimX, dimY), 0.2f);
 
 		fillSolidWorld (world, tilesToUse [0], dimX, dimY);
 

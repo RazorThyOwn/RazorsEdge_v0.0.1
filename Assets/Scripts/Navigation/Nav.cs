@@ -4,17 +4,16 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 public class Nav : MonoBehaviour {
-
-	public Transform seeker, target;
-
+	
 	Grid grid;
 
 	void Awake() {
+		
 		grid = GetComponent<Grid> ();
 
 	}
 
-	void FindPath(Vector2 startPos, Vector2 targetPos) {
+	public void FindPath(Vector2 startPos, Vector2 targetPos) {
 		
 		Stopwatch sw = new Stopwatch ();
 		sw.Start ();
@@ -89,6 +88,8 @@ public class Nav : MonoBehaviour {
 		path.Reverse ();
 
 		grid.path = path;
+		PlayerMove.playerPath = path;
+
 	}
 
 	int GetDistance(Node nodeA, Node nodeB){
@@ -102,6 +103,14 @@ public class Nav : MonoBehaviour {
 			return costMult * dstY + costMult * (dstX - dstY);
 		}
 		return costMult * dstX + costMult * (dstY - dstX);
+	}
+
+	public Vector2 getMouseNode(){
+
+		Node mouse = grid.NodeFromWorldPoint ((Vector2)Input.mousePosition);
+		Vector2 mouseNodePos = mouse.worldPosition;
+		return mouseNodePos;
+
 	}
 
 }

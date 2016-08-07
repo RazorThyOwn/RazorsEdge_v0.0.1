@@ -4,11 +4,10 @@ using System.Collections.Generic;
 
 public class Grid : MonoBehaviour {
 
-	public Transform player;
-	public Transform ghost;
-	public LayerMask unwalkableMask;
+
 	public Vector2 gridWorldSize;
 	public float nodeRadius;
+	public GameManager gameManager;
 
 	Node[,] grid;
 
@@ -16,21 +15,22 @@ public class Grid : MonoBehaviour {
 	int gridSizeX, gridSizeY;
 
 	//set the nodeDiameter and determine the grid size by taking the x and y of the world size and dividing it by the diameter
-	public Grid(Transform _player, Transform _ghost, LayerMask _unwalkableMask, Vector2 _gridWorldSize, float _nodeRadius) {
-		player = _player;
-		ghost = _ghost;
-		unwalkableMask = _unwalkableMask;
-		gridWorldSize = _gridWorldSize;
+	public Grid(float _nodeRadius) {
 		nodeRadius = _nodeRadius;
 	}
 
 	void Awake() {
 		nodeDiameter = nodeRadius * 2;
+	}
+
+	void Update(){
+		
+		gridWorldSize = new Vector2(gameManager.mapSizeDimX*.4f, gameManager.mapSizeDimY*.4f);
 		gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
 		gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
 		CreateGrid();
-	}
 
+	}
 	public int MaxSize{
 		get{return gridSizeX * gridSizeY; }
 	}
@@ -43,7 +43,7 @@ public class Grid : MonoBehaviour {
 		for (int x = 0; x < gridSizeX; x++) {
 			for (int y = 0; y < gridSizeY; y++) {
 				Vector2 worldPoint = worldBottomLeft + Vector2.right * (x * nodeDiameter + nodeRadius) + Vector2.up * (y * nodeDiameter + nodeRadius);
-				bool walkable = ((Physics2D.OverlapCircle (worldPoint, nodeRadius, unwalkableMask)) == null);
+				bool walkable = true;//((Physics2D.OverlapCircle (worldPoint, nodeRadius, unwalkableMask)) == null);
 				grid [x, y] = new Node(walkable, worldPoint, x, y, 1);
 
 			}
@@ -95,19 +95,7 @@ public class Grid : MonoBehaviour {
 		Gizmos.DrawWireCube (transform.position, new Vector2(gridWorldSize.x, gridWorldSize.y));
 		List<Node> others = new List<Node> ();
 		if(grid != null){
-			Node playerNode = NodeFromWorldPoint (player.position);
-			Node ghostNode = NodeFromWorldPoint (ghost.position);
 			foreach (Node n in grid){
-				Gizmos.color = (n.walkable)?Color.white:Color.red;
-				if (n == playerNode) {
-					Gizmos.color = Color.yellow;
-					others = GetNeighbours (n);
-				}
-				if (n == ghostNode)
-					Gizmos.color = Color.blue;
-				if (others.Contains (n)) {
-					Gizmos.color = Color.green;
-				}
 				if (path != null) {
 					if (path.Contains (n)) {
 						Gizmos.color = Color.black;
