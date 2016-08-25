@@ -7,7 +7,7 @@ public class Grid : MonoBehaviour {
 
 	public Vector2 gridWorldSize;
 	public float nodeRadius;
-	public GameManager gameManager;
+	//public GameManager gameManager;
 
 	Node[,] grid;
 
@@ -25,7 +25,7 @@ public class Grid : MonoBehaviour {
 
 	void Update(){
 		
-		gridWorldSize = new Vector2(gameManager.mapSizeDimX*.4f, gameManager.mapSizeDimY*.4f);
+		//gridWorldSize = new Vector2(gameManager.mapSizeDimX*.4f, gameManager.mapSizeDimY*.4f);
 		gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
 		gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
 		CreateGrid();

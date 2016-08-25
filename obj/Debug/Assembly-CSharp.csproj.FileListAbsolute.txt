@@ -40,3 +40,24 @@ C:\Users\Alex Weber\Documents\RazorsEdge_v0.0.1\Temp\bin\Debug\UnityEditor.xml
 C:\Users\Alex Weber\Documents\RazorsEdge_v0.0.1\Temp\bin\Debug\UnityEngine.UI.xml
 C:\Users\Alex Weber\Documents\RazorsEdge_v0.0.1\Temp\bin\Debug\UnityEngine.Networking.xml
 C:\Users\Alex Weber\Documents\RazorsEdge_v0.0.1\obj\Debug\Assembly-CSharp.pdb
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\obj\Debug\Assembly-CSharp.dll
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\Assembly-CSharp.dll
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\Assembly-CSharp.pdb
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\UnityEditor.dll
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\UnityEngine.dll
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\UnityEngine.Networking.dll
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\UnityEngine.UI.dll
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\Mono.Cecil.dll
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\Unity.SerializationLogic.dll
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\Unity.DataContract.dll
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\Unity.UNetWeaver.dll
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\Unity.CecilTools.dll
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\UnityEngine.xml
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\UnityEditor.xml
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\UnityEngine.UI.xml
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\Temp\bin\Debug\UnityEngine.Networking.xml
+D:\Files\Code\RazorsEdge\RazorsEdge_v0.0.1\obj\Debug\Assembly-CSharp.pdb
