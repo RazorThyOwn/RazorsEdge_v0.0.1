@@ -5,20 +5,28 @@ public class World_TerrainHolder : MonoBehaviour {
 
 	// Instance Fields
 	// NEEDS to hold an integer 2D array named terrain[,] containing the tileIDs for co-ordinates
+	// Should also contain a link to the WorldGen script, in order to properly generate terrain...
 
 	// Role
 
 	// Holds all the Terrain information in the map
 
-	private short[,] terrain;
-	private short[,] terrainCost;
+	public bool isValid = false;
 
-	private short chunkSize, numChunks, terrainType;
+	public static short [,] terrain;
+	public static short [,] terrainCost;
 
-	private int sizeX, sizeY;
+	public static int num = 0;
+
+	private static short chunkSize, numChunks, terrainType;
+
+	private static int sizeX, sizeY;
+
+	private World_Generator wg;
 
 	void Awake() {
 		DontDestroyOnLoad (this);
+		terrainType = 0;
 	}
 
 	public void setData(short _chunkSize, short _numChunks, short _terrainType) {
@@ -32,6 +40,8 @@ public class World_TerrainHolder : MonoBehaviour {
 	}
 
 	public void generateWorld() {
+
+		// All this method does is, essentially, initialize the world to contain all zeroes. Does not actually use world gen
 		
 		terrain = new short[sizeX, sizeY];
 		terrainCost = new short[sizeX, sizeY];
@@ -44,5 +54,28 @@ public class World_TerrainHolder : MonoBehaviour {
 		}
 
 		Debug.Log ("Initialized the world... NumChunks: "+numChunks+", ChunkSize: "+chunkSize);
+		isValid = true;
+	}
+
+
+	public void worldGenWorld() {
+
+
+		// Actually generates the world
+
+		wg = new World_Generator (chunkSize, numChunks, terrainType, terrain, terrainCost);
+		wg.generate ();
+
+		terrain = wg.getTerrain ();
+		terrainCost = wg.getTerrainCost ();
+
+	}
+
+	public short[,] getTerrain() {
+		return terrain;
+	}
+
+	public short[,] getTerrainCost() {
+		return terrainCost;
 	}
 }

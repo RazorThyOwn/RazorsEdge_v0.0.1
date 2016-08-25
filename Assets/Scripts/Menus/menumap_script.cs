@@ -48,7 +48,7 @@ public class menumap_script : MonoBehaviour {
 		// Initializing slider values
 		chunkSize = 19;
 		numChunks = 11;
-		terrainType = 1;
+		terrainType = 0;
 	}
 
 	public void OnGUI() {
@@ -56,7 +56,11 @@ public class menumap_script : MonoBehaviour {
 		// Should complete all GUI Element assignments
 
 		if (GUI.Button (accept, "Accept Map")) {
-			acceptWorld ();
+			if (terrainHolder.isValid) {
+				acceptWorld ();
+			} else {
+				Debug.Log ("No valid world initialized!");
+			}
 		}
 
 		if (GUI.Button (generate, "Generate Map")) {
@@ -67,8 +71,8 @@ public class menumap_script : MonoBehaviour {
 			Application.LoadLevel ("menu_initScreen");
 		}
 
-		chunkSize = (short)GUI.HorizontalSlider (chunkSlider, chunkSize, 19f, 49f);
-		numChunks = (short)GUI.HorizontalSlider (numChunkSlider, numChunks, 11f, 41f);
+		chunkSize = (short)GUI.HorizontalSlider (chunkSlider, chunkSize, 9f, 29f);
+		numChunks = (short)GUI.HorizontalSlider (numChunkSlider, numChunks, 5f, 15f);
 	}
 
 	private void generateMap() {

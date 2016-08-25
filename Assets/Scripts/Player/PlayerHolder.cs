@@ -10,16 +10,19 @@ public class PlayerHolder : MonoBehaviour {
 	// Should also contain all the information regarding the player
 
 	public GameObject playerObject;
-	public int numPlayers;
-	private List<GameObject> playerList;
+	public static int numPlayers = 0;
+	private static List<GameObject> playerList;
 
 	void Awake() {
+		playerList = new List<GameObject> ();
 		DontDestroyOnLoad (this);
 	}
 
 	public void addPlayer(int red, int green, int blue, string name) {
 
+		numPlayers++;
 		GameObject newPlayer = Instantiate (playerObject);
+		newPlayer.SetActive (false);
 		PlayerInfo pl = (PlayerInfo)newPlayer.GetComponent<PlayerInfo> ();
 
 		pl.red = red;
@@ -28,5 +31,21 @@ public class PlayerHolder : MonoBehaviour {
 		pl.name = name;
 
 		Debug.Log ("Added player " + name + " of color " + red + "," + green + "," + blue);
+
+
+		playerList.Add (newPlayer);
+	}
+
+	public int getNumPlayers() {
+		return numPlayers;
+	}
+
+	public void removePlayer(int index) {
+		numPlayers--;
+		playerList.RemoveAt (index);
+	}
+
+	public GameObject getPlayer(int index) {
+		return playerList [index];
 	}
 }
