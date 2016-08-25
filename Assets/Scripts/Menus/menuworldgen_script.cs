@@ -25,11 +25,10 @@ public class menuworldgen_script : MonoBehaviour {
 
 	void OnGUI() {
 
-		for (int i = 0; i < terrainHolder.getTerrain ().GetLength(0); i++) {
-			for (int j = 0; j < terrainHolder.getTerrain ().GetLength (1); j++) {
+		for (int i = 0; i < terrainHolder.getChunkTerrain ().GetLength(0); i++) {
+			for (int j = 0; j < terrainHolder.getChunkTerrain ().GetLength (1); j++) {
 
-				short number = terrainHolder.getTerrain () [i, j];
-				short cost = terrainHolder.getTerrainCost () [i, j];
+				short number = terrainHolder.getChunkTerrain () [i, j];
 				if (number == 0) {
 					GUI.color = Color.blue;
 
@@ -53,7 +52,7 @@ public class menuworldgen_script : MonoBehaviour {
 					GUI.color = Color.gray;
 				}
 
-					GUI.Label (new Rect (i * 20, j * 20, 20, 20), ""+number+":"+cost);
+					GUI.Label (new Rect (i * 20, j * 20, 20, 20), ""+number);
 			}
 		}
 	}

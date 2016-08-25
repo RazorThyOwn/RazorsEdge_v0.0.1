@@ -16,13 +16,13 @@ public class World_TerrainHolder : MonoBehaviour {
 	public static short [,] terrain;
 	public static short [,] terrainCost;
 
-	public static int num = 0;
+	public static short [,] chunkTerrain;
 
 	private static short chunkSize, numChunks, terrainType;
 
 	private static int sizeX, sizeY;
 
-	private World_Generator wg;
+	private World_ChunkGenerator wg;
 
 	void Awake() {
 		DontDestroyOnLoad (this);
@@ -61,14 +61,17 @@ public class World_TerrainHolder : MonoBehaviour {
 	public void worldGenWorld() {
 
 
-		// Actually generates the world
+		// Generates the chunk map for the world
 
-		wg = new World_Generator (chunkSize, numChunks, terrainType, terrain, terrainCost);
+		wg = new World_ChunkGenerator (numChunks, terrainType);
 		wg.generate ();
 
-		terrain = wg.getTerrain ();
-		terrainCost = wg.getTerrainCost ();
+		chunkTerrain = wg.getChunkTerrain ();
 
+	}
+
+	public short[,] getChunkTerrain() {
+		return chunkTerrain;
 	}
 
 	public short[,] getTerrain() {

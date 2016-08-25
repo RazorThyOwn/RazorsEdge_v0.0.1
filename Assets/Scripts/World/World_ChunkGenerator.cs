@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class World_Generator : MonoBehaviour {
+public class World_ChunkGenerator : MonoBehaviour {
 
 	// Instance Fields
 	// Should contain an Int regarding number of chunks, an Int regarding chunk size, and a Short determining terrain generation type
@@ -14,24 +14,22 @@ public class World_Generator : MonoBehaviour {
 	private static short GRASS = 3;
 	private static short FOREST = 4;
 
-	private int numChunks, chunkSize;
+	private int numChunks;
 	private short terrainType;
 
 	private short[,] terrain;
-	private short[,] terrainCost;
 
 	private int sizeX, sizeY;
 
-	public World_Generator(int _numChunks, int _chunkSize, short _terrainType, short[,] _terrain, short[,] _terrainCost) {
+	public World_ChunkGenerator(int _numChunks, short _terrainType) {
 		
 		numChunks = _numChunks;
-		chunkSize = _chunkSize;
 		terrainType = _terrainType;
-		terrain = _terrain;
-		terrainCost = _terrainCost;
 
-		sizeX = chunkSize * numChunks;
+		sizeX = _numChunks;
 		sizeY = sizeX;
+
+		terrain = new short[sizeX, sizeY];
 
 	}
 
@@ -74,18 +72,14 @@ public class World_Generator : MonoBehaviour {
 				if (i % 2 == 1) {
 					if (j % 2 == 1) {
 						terrain [i, j] = 0;
-						terrainCost [i, j] = 1;
 					} else {
 						terrain [i, j] = 1;
-						terrainCost [i, j] = 2;
 					}
 				} else {
 					if (j % 2 == 1) {
 						terrain [i, j] = 1;
-						terrainCost [i, j] = 2;
 					} else {
 						terrain [i, j] = 0;
-						terrainCost [i, j] = 1;
 					}
 				}
 			}
@@ -275,15 +269,9 @@ public class World_Generator : MonoBehaviour {
 
 
 
-	public short[,] getTerrain() {
+	public short[,] getChunkTerrain() {
 
 		return terrain;
-
-	}
-
-	public short[,] getTerrainCost() {
-
-		return terrainCost;
 
 	}
 }
