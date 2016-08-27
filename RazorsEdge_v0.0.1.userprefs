@@ -1,11 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\World\World_Generator.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\World\World_TerrainHolder.cs">
     <Files>
-      <File FileName="Assets\Scripts\World\World_TerrainHolder.cs" Line="5" Column="2" />
-      <File FileName="Assets\Scripts\Menus\menuworldgen_script.cs" Line="32" Column="57" />
+      <File FileName="Assets\Scripts\Menus\menuworldgen_script.cs" Line="55" Column="61" />
       <File FileName="Assets\Scripts\Menus\menumap_script.cs" Line="74" Column="68" />
-      <File FileName="Assets\Scripts\World\World_Generator.cs" Line="43" Column="18" />
+      <File FileName="Assets\Scripts\World\World_ChunkGenerator.cs" Line="272" Column="26" />
+      <File FileName="Assets\Scripts\World\World_TerrainHolder.cs" Line="66" Column="56" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
