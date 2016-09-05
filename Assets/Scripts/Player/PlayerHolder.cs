@@ -30,6 +30,9 @@ public class PlayerHolder : MonoBehaviour {
 		pl.blue = blue;
 		pl.name = name;
 
+		newPlayer.name = name;
+
+		pl.setColor ();
 		Debug.Log ("Added player " + name + " of color " + red + "," + green + "," + blue);
 
 

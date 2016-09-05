@@ -21,10 +21,18 @@ public class menuworldgen_script : MonoBehaviour {
 		terrainHolder = (World_TerrainHolder)terrainHolderObj.GetComponent<World_TerrainHolder>();
 
 		terrainHolder.worldGenWorld ();
+
+		terrainHolder.loadSpawn ();
+
+		loadScene ("menu_gameScreen");
+
+
 	}
 
 	void OnGUI() {
 
+		GUI.Label (new Rect (200, 200, 250, 20), "Loading...");
+		/*
 		for (int i = 0; i < terrainHolder.getChunkTerrain ().GetLength(0); i++) {
 			for (int j = 0; j < terrainHolder.getChunkTerrain ().GetLength (1); j++) {
 
@@ -54,6 +62,13 @@ public class menuworldgen_script : MonoBehaviour {
 
 					GUI.Label (new Rect (i * 20, j * 20, 20, 20), ""+number);
 			}
-		}
+		}*/ // Drawing the grid if we want too
+	}
+
+	private int loadScene(string sceneName) {
+
+		// Should take in the parameter sceneName and load that corresponding scenere
+		Application.LoadLevel(sceneName);
+		return 0;
 	}
 }

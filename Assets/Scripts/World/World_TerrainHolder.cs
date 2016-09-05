@@ -22,7 +22,7 @@ public class World_TerrainHolder : MonoBehaviour {
 
 	private static int sizeX, sizeY;
 
-	private World_ChunkGenerator wg;
+	private static World_ChunkGenerator wg;
 
 	void Awake() {
 		DontDestroyOnLoad (this);
@@ -63,10 +63,57 @@ public class World_TerrainHolder : MonoBehaviour {
 
 		// Generates the chunk map for the world
 
-		wg = new World_ChunkGenerator (numChunks, terrainType);
+		wg = new World_ChunkGenerator (numChunks, terrainType, chunkSize);
 		wg.generate ();
 
 		chunkTerrain = wg.getChunkTerrain ();
+
+	}
+
+	public void loadChunk(int chunkX, int chunkY) {
+
+		// Fill in actually spawning the chunks for this area
+
+		int startX = chunkX * chunkSize;
+		int startY = chunkY * chunkSize;
+
+		int stopX = chunkX * chunkSize + chunkSize - 1;
+		int stopY = chunkY * chunkSize + chunkSize - 1;
+
+		for (int i = startX; i <= stopX; i++) {
+			for (int j = startY; j <= stopY; j++) {
+
+			}
+		}
+	}
+
+	public int copyInChunk(int chunkX, int chunkY, short[,] chunk) {
+		//Debug.Log ("Copying in chunk...");
+		//Debug.Log (terrain.GetLength (0) + "," + terrain.GetLength (1));
+		for (int i = 0; i < chunkSize; i++) {
+			for (int j = 0; j < chunkSize; j++) {
+				//Debug.Log ((chunkX*chunkSize+i) + "," + (chunkY*chunkSize+j));
+				terrain [chunkX * chunkSize + i, chunkY * chunkSize + j] = chunk [i, j];
+			}
+		}
+
+		return 1;
+	}
+
+	public short[,] copyOutChunk(int chunkX, int chunkY) {
+
+		short[,] returnChunk = new short[chunkSize, chunkSize];
+
+		for (int i = 0; i < chunkSize; i++) {
+			for (int j = 0; j < chunkSize; j++) {
+				returnChunk [i, j] = terrain [chunkX * chunkSize + i, chunkY * chunkSize + j];
+			}
+		}
+
+		return returnChunk;
+	}
+
+	public void loadSpawn() {
 
 	}
 
@@ -80,5 +127,9 @@ public class World_TerrainHolder : MonoBehaviour {
 
 	public short[,] getTerrainCost() {
 		return terrainCost;
+	}
+
+	public short getChunkSize() {
+		return chunkSize;
 	}
 }

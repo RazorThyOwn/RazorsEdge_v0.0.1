@@ -71,8 +71,11 @@ public class menumap_script : MonoBehaviour {
 			Application.LoadLevel ("menu_initScreen");
 		}
 
-		chunkSize = (short)GUI.HorizontalSlider (chunkSlider, chunkSize, 9f, 29f);
-		numChunks = (short)GUI.HorizontalSlider (numChunkSlider, numChunks, 5f, 15f);
+		chunkSize = (short)GUI.HorizontalSlider (chunkSlider, chunkSize, 8f, 30f);
+		if (chunkSize % 2 != 0) {
+			chunkSize++;
+		}
+		numChunks = (short)GUI.HorizontalSlider (numChunkSlider, numChunks, 9f, 29f);
 	}
 
 	private void generateMap() {

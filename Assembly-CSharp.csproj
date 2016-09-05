@@ -51,6 +51,8 @@
      <Compile Include="Assets\Scripts\Depycrated\World.cs" />
      <Compile Include="Assets\Scripts\Depycrated\WorldGen.cs" />
      <Compile Include="Assets\Scripts\Depycrated\WorldTile.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Menus\menugame_script.cs" />
      <Compile Include="Assets\Scripts\Menus\menuinit_script.cs" />
      <Compile Include="Assets\Scripts\Menus\menumap_script.cs" />
      <Compile Include="Assets\Scripts\Menus\menuplayers_script.cs" />
@@ -63,6 +65,7 @@
      <Compile Include="Assets\Scripts\Player\PlayerHolder.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerInfo.cs" />
      <Compile Include="Assets\Scripts\World\World_ChunkGenerator.cs" />
+     <Compile Include="Assets\Scripts\World\World_ChunkSpawner.cs" />
      <Compile Include="Assets\Scripts\World\World_TerrainHolder.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

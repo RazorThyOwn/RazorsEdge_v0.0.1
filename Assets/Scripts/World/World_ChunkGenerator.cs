@@ -16,15 +16,17 @@ public class World_ChunkGenerator : MonoBehaviour {
 
 	private int numChunks;
 	private short terrainType;
+	private int chunkSize;
 
 	private short[,] terrain;
 
 	private int sizeX, sizeY;
 
-	public World_ChunkGenerator(int _numChunks, short _terrainType) {
+	public World_ChunkGenerator(int _numChunks, short _terrainType, int _chunkSize) {
 		
 		numChunks = _numChunks;
 		terrainType = _terrainType;
+		chunkSize = _chunkSize;
 
 		sizeX = _numChunks;
 		sizeY = sizeX;
@@ -49,7 +51,7 @@ public class World_ChunkGenerator : MonoBehaviour {
 
 
 
-
+	// Chunk Map Generation Below
 
 
 
@@ -94,6 +96,7 @@ public class World_ChunkGenerator : MonoBehaviour {
 		Debug.Log ("Generating island...");
 
 		fillSolidWorld(DEEP_OCEAN);
+		genCornCentered (GRASS);
 
 		// Generating the island
 		int count = 0;
@@ -113,8 +116,10 @@ public class World_ChunkGenerator : MonoBehaviour {
 
 		// Creating sand and shallow water
 
-		genLip (DEEP_OCEAN, SHALLOW_OCEAN, GRASS);
-		genLip (GRASS, SAND, SHALLOW_OCEAN);
+		genLip (DEEP_OCEAN, SAND, GRASS);
+		genLip (DEEP_OCEAN, SHALLOW_OCEAN, SAND);
+		genLipNulled (SAND, GRASS, SHALLOW_OCEAN);
+		genLipNulled (SAND, GRASS, SHALLOW_OCEAN);
 
 		int[] lineFunc = { 0, 0, 1 };
 
@@ -186,6 +191,36 @@ public class World_ChunkGenerator : MonoBehaviour {
 		Debug.Log ("Lip Generated");
 	}
 
+	public void genLipNulled(short tarTile, short replaceTile, short neighborTile) {
+
+		Debug.Log ("Lip Generating on "+tarTile+" against "+neighborTile+" replaced with "+replaceTile);
+
+		for (int x = 0; x < sizeX; x++) {
+			for (int y = 0; y < sizeY; y++) {
+
+				Debug.Log ("X:" + x + ", Y:" + y);
+				short tile = terrain [x, y];
+
+				if (tile == tarTile) {
+
+					if (y - 1 >= 0 && neighborTile == terrain[x, y - 1]) {
+						return;
+					} else if (x - 1 >= 0 && neighborTile == terrain[x - 1, y]) {
+						return;
+					} else if (x + 1 < sizeX && neighborTile == terrain[x + 1, y]) {
+						return;
+					} else if (y + 1 < sizeY && neighborTile == terrain[x, y + 1]) {
+						return;
+					}
+
+					terrain [x, y] = replaceTile;
+				}
+			}
+		}
+
+		Debug.Log ("Lip Generated");
+	}
+
 	public void genEllipse(short replaceTile, int tarX, int tarY, int length, int height) {
 
 		Debug.Log ("Generating ellipse at x:"+tarX+", y:"+tarY+" of length:"+length+" and height:"+height+", using "+replaceTile);
@@ -246,6 +281,35 @@ public class World_ChunkGenerator : MonoBehaviour {
 		}
 
 		Debug.Log ("Ellipse replaced...");
+	}
+
+	public void genCornCentered(short tile) {
+
+		setChunk (tile, sizeX / 2 - 1, sizeY / 2 - 1, sizeX / 2 + 1, sizeY / 2 + 1);
+	}
+
+	public void setChunk(short tile, int beginX, int beginY, int endX, int endY) {
+
+		for (int i = beginX; i <= endX; i++) {
+			for (int j = beginY; j <= endY; j++) {
+
+				terrain [i, j] = tile;
+			}
+		}
+	}
+
+
+
+
+
+
+
+
+	// Generating local chunks
+
+
+	public void genChunk() {
+
 	}
 
 	public float getDistance(int x1, int y1, int x2, int y2) {
