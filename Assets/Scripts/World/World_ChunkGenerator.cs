@@ -138,6 +138,10 @@ public class World_ChunkGenerator : MonoBehaviour {
 			count++;
 
 		}
+
+		genLipNulled (SAND, GRASS, SHALLOW_OCEAN);
+		genLipNulled (SAND, GRASS, SHALLOW_OCEAN);
+
 		Debug.Log ("Islands generated... hopefully");
 	}
 

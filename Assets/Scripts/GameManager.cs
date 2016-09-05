@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour {
 	private float xBound, yBound;
 	private int chunkSize;
 
+	private int camChunkX, camChunkY;
+
 	public float tileSize;
 	public GameObject[] tilesToUse;
 	public Camera cam;
@@ -70,8 +72,8 @@ public class GameManager : MonoBehaviour {
 
 		// Spawning in cornucopia chunks
 
-		for (int i = centerChunk - 2; i < centerChunk + 3; i++) {
-			for (int j = centerChunk - 2; j < centerChunk + 3; j++) {
+		for (int i = centerChunk-2; i < centerChunk+3; i++) {
+			for (int j = centerChunk-2; j < centerChunk+3; j++) {
 
 				short[,] tmpChunk = terrainHolder.copyOutChunk(i, j);
 				loadInChunk (tmpChunk, i, j);
@@ -136,18 +138,37 @@ public class GameManager : MonoBehaviour {
 		}
 
 		// Checking if outside chunks.. because that is bad AS FUCKKKK!!!
-		float currentX = currentPlayer.transform.position.x + xBound;
-		float currentY = currentPlayer.transform.position.y + yBound;
 
-		int chunkX = (int)(currentX / chunkSize);
-		int chunkY = (int)(currentY / chunkSize);
+		int chunkX = (int)( (currentPlayer.transform.position.x + xBound) / tileSize)/terrainHolder.getChunkSize();
+		int chunkY = (int)( (currentPlayer.transform.position.y + xBound) / tileSize)/terrainHolder.getChunkSize();
 
-		if (!isChunkLoad [chunkX, chunkY]) {
-			Debug.Log ("outside current map... FIXME");
+		if (chunkX != camChunkX || chunkY != camChunkY) {
+
+			camChunkX = chunkX;
+			camChunkY = chunkY;
+			// We have loaded a new chunk if this is the case...
+			Debug.Log ("OUT: " + chunkX + "," + chunkY);
+
+			checkLoadedChunk (chunkX, chunkY);
 		}
+	}
 
-		currentX /= tileSize;
-		currentY /= tileSize;
+	void checkLoadedChunk(int chunkX, int chunkY) {
+	
+		for (int i = chunkX - 2; i < chunkX + 3; i++) {
+			for (int j = chunkY - 2; j < chunkY + 3; j++) {
+
+				if (!isChunkLoad [i, j]) {
+
+					short[,] tmpChunk = wcs.spawnChunk ((short)i, (short)j);
+					terrainHolder.copyInChunk (i,j,tmpChunk);
+					loadInChunk (tmpChunk, i, j);
+					reloadTerrain ();
+
+					Debug.Log ("Loading in new chunk! At " + i + "," + j);
+				}
+			}
+		}
 	}
 
 	void advanceTurn() {

@@ -24,15 +24,14 @@ public class menuworldgen_script : MonoBehaviour {
 
 		terrainHolder.loadSpawn ();
 
-		loadScene ("menu_gameScreen");
 
 
 	}
 
 	void OnGUI() {
 
-		GUI.Label (new Rect (200, 200, 250, 20), "Loading...");
-		/*
+		GUI.Label (new Rect (700, 200, 250, 20), "Loading...");
+
 		for (int i = 0; i < terrainHolder.getChunkTerrain ().GetLength(0); i++) {
 			for (int j = 0; j < terrainHolder.getChunkTerrain ().GetLength (1); j++) {
 
@@ -62,7 +61,11 @@ public class menuworldgen_script : MonoBehaviour {
 
 					GUI.Label (new Rect (i * 20, j * 20, 20, 20), ""+number);
 			}
-		}*/ // Drawing the grid if we want too
+		}
+
+		if (GUI.Button (new Rect (700, 300, 300, 50), "Go to game...")) {
+			loadScene ("menu_gameScreen");
+		}
 	}
 
 	private int loadScene(string sceneName) {
